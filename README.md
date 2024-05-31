@@ -22,4 +22,4 @@ Airspeed Indicator's needle is capped to 270 kph but the display will keep print
 ![heading](readme_assets/ss_compass.png)
 
 ## Sample Usage Code
-*To be updated
+```* To be updated```
