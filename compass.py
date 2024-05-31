@@ -10,7 +10,7 @@ class RotatingCompass(Canvas):
         self.parent = parent
         self.configure(bg="#1c1c1c", highlightthickness=0)
 
-        self.center_image = Image.open("assets\compass.png")
+        self.center_image = Image.open("assets\compassbg.png")
         self.rotating_image = Image.open("assets\\needle.png")
 
         self.center_image_tk = ImageTk.PhotoImage(self.center_image)
