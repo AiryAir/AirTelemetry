@@ -11,3 +11,7 @@ AirTelemetry is a Python-based project utilizing Tkinter to create minimal GUI i
   - **Altimeter**: Indicates the aircraft's altitude above sea level.
   - **Turn Coordinator**: Displays the rate of turn and coordination.
   - **Vertical Speed Indicator**: Measures the rate of climb or descent.
+
+## Screenshots
+![speedometer](readme_assets/ss_speedo.png)
+![heading](readme_assets/ss_compass.png)
