@@ -1,4 +1,4 @@
-![AirTelemetry](readme_assets/logo.png)
+![AirTelemetry](readme_assets/logo_gif.gif)
 # AirTelemetry - Flight Instruments GUI's with Python
 
 AirTelemetry is a Python-based project utilizing Tkinter to create minimal GUI interfaces for aircraft navigation instruments. This project aims to provide an easy-to-use and visually appealing set of tools for simulating and displaying key aircraft navigation data. 
