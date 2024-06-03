@@ -1,9 +1,6 @@
-# THIS IS A BETA VERSION OF THE ATTITUDE INDICATOR
-# Pitch up/down is NOT indicated as expected
-# Roll left/right is indicated as expected
-
 import tkinter as tk
 from PIL import Image, ImageTk
+import math
 
 class AttitudeIndicator(tk.Canvas):
     def __init__(self, parent, bg_image_path, fg_image_path, *args, **kwargs):
@@ -22,14 +19,19 @@ class AttitudeIndicator(tk.Canvas):
         self.pitch_text = self.create_text(350, 20, anchor="n", font=("Segoe UI", 12), fill="white", text="Pitch: 0°")
         self.roll_text = self.create_text(350, 40, anchor="n", font=("Segoe UI", 12), fill="white", text="Roll: 0°")
 
-
         self.pack(fill="both", expand=True)
 
     def update_attitude(self, pitch, roll):
         self.itemconfig(self.pitch_text, text=f"Pitch: {pitch}°")
         self.itemconfig(self.roll_text, text=f"Roll: {roll}°")
 
-        offset = int(pitch * 179 / 90)
+        pitch_offset = int(pitch * 179 / 90)
+        
+        roll_radians = math.radians(roll)
+        roll_compensation = pitch_offset * math.cos(roll_radians)
+        
+        # Total offset
+        total_offset = pitch_offset + roll_compensation
 
         if abs(pitch) > 90:
             self.bg_image = Image.open(self.bg_image_path).rotate(180)
@@ -39,11 +41,10 @@ class AttitudeIndicator(tk.Canvas):
         self.bg_image = self.bg_image.rotate(-roll)
         self.bg_image_tk = ImageTk.PhotoImage(self.bg_image)
         self.itemconfig(self.bg_item, image=self.bg_image_tk)
-        self.coords(self.bg_item, 350, 350 + offset)
+        self.coords(self.bg_item, 350, 350 + total_offset)
 
     def demo(self):
         import itertools
-        import math
 
         pitches = itertools.chain(range(-90, 91, 2), range(90, -91, -2))
         rolls = itertools.cycle(itertools.chain(range(-90, 91, 2), range(90, -91, -2)))
@@ -53,15 +54,6 @@ class AttitudeIndicator(tk.Canvas):
                 pitch = next(pitches)
                 roll = next(rolls)
 
-                if abs(pitch) > 90:
-                    for step in range(1, 181, 10):
-                        angle = step if pitch > 90 else -step
-                        bg_image_rotated = Image.open(self.bg_image_path).rotate(180 + angle)
-                        self.bg_image_tk = ImageTk.PhotoImage(bg_image_rotated)
-                        self.itemconfig(self.bg_item, image=self.bg_image_tk)
-                        self.update()
-                        self.after(10)
-                
                 self.update_attitude(pitch, roll)
                 self.update()
                 self.after(50, animate)
@@ -75,7 +67,6 @@ if __name__ == "__main__":
     root.title("Attitude Indicator")
     root.geometry("700x700")
 
-    # Provide the paths to your background and foreground images
     bg_image_path = "assets/attitudebg.png"
     fg_image_path = "assets/attitudefg.png"
 
