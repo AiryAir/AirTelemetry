@@ -151,7 +151,7 @@ class AttitudeIndicator(tk.Canvas):
 
         pitch_sequence_full_up = list(range(-90, 91, 2))
         pitch_sequence_full_down = list(range(90, -91, -2))
-        pitch_sequence_flip_over = list(range(0, 96, 2)) + list(range(95, 0, -2))
+        pitch_sequence_flip_over = list(range(0, 100, 2)) + list(range(100, 0, -2))
         pitch_sequence_level = [0] * 36
         roll_sequence_full_right = list(range(0, 91, 2))
         roll_sequence_full_left = list(range(90, -91, -2))
