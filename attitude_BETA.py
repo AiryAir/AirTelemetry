@@ -91,6 +91,9 @@ class AttitudeIndicator(tk.Canvas):
             def animate():
                 try:
                     pitch = next(pitches)
+                    if abs(pitch) > 88:
+                        self.quick_flip(pitch, roll, next_animation)
+                        return
                     self.update_attitude(pitch, roll)
                     self.update()
                     self.after(50, animate)
@@ -118,6 +121,9 @@ class AttitudeIndicator(tk.Canvas):
                 try:
                     pitch = next(pitches)
                     roll = next(rolls)
+                    if abs(pitch) > 88:
+                        self.quick_flip(pitch, roll, next_animation)
+                        return
                     self.update_attitude(pitch, roll)
                     self.update()
                     self.after(50, animate)
@@ -128,33 +134,12 @@ class AttitudeIndicator(tk.Canvas):
             rolls = iter(roll_sequence)
             animate()
 
-        def animate_flip(pitch_sequence, roll=0, next_animation=None):
-            def animate():
-                try:
-                    pitch = next(pitches)
-                    if pitch == 90:
-                        for angle in range(0, 181, 10):
-                            self.bg_image = Image.open(self.bg_image_path).rotate(angle)
-                            self.bg_image_tk = ImageTk.PhotoImage(self.bg_image)
-                            self.itemconfig(self.bg_item, image=self.bg_image_tk)
-                            self.update()
-                            self.after(50)
-                        pitch = 90  # Reset pitch to 90 after flip
-                    self.update_attitude(pitch, roll)
-                    self.update()
-                    self.after(50, animate)
-                except StopIteration:
-                    if next_animation:
-                        next_animation()
-            pitches = iter(pitch_sequence)
-            animate()
-
-        pitch_sequence_full_up = list(range(-90, 91, 2))
-        pitch_sequence_full_down = list(range(90, -91, -2))
-        pitch_sequence_flip_over = list(range(0, 100, 2)) + list(range(100, 0, -2))
+        pitch_sequence_full_up = list(range(-6, 6, 2))
+        pitch_sequence_full_down = list(range(6, -6, -2))
+        pitch_sequence_flip_over = list(range(0, 120, 2)) + list(range(120, 0, -2))
         pitch_sequence_level = [0] * 36
-        roll_sequence_full_right = list(range(0, 91, 2))
-        roll_sequence_full_left = list(range(90, -91, -2))
+        roll_sequence_full_right = list(range(0, 6, 2))
+        roll_sequence_full_left = list(range(6, -6, -2))
         roll_sequence_level = [0] * 36
 
         animate_pitch(
@@ -172,8 +157,10 @@ class AttitudeIndicator(tk.Canvas):
                                 next_animation=lambda: animate_pitch_and_roll(
                                     pitch_sequence_full_up + pitch_sequence_full_down + pitch_sequence_level,
                                     roll_sequence_full_right + roll_sequence_full_left + roll_sequence_level,
-                                    next_animation=lambda: animate_flip(
-                                        pitch_sequence_flip_over
+                                    next_animation=lambda: self.quick_flip(
+                                        pitch_sequence_flip_over[0], 0, animate_pitch_and_roll(
+                                            pitch_sequence_flip_over, [0]*len(pitch_sequence_flip_over)
+                                        )
                                     )
                                 )
                             )
@@ -182,6 +169,20 @@ class AttitudeIndicator(tk.Canvas):
                 )
             )
         )
+
+    def quick_flip(self, pitch, roll, next_animation=None):
+        def animate():
+            if pitch > 90 or pitch < -90:
+                self.bg_image = Image.open(self.bg_image_path).rotate(180 if pitch > 90 else -180)
+                self.bg_image_tk = ImageTk.PhotoImage(self.bg_image)
+                self.itemconfig(self.bg_item, image=self.bg_image_tk)
+                self.update()
+                new_pitch = 180 - pitch if pitch > 90 else -180 - pitch
+                self.update_attitude(new_pitch, roll)
+                self.update()
+                if next_animation:
+                    next_animation()
+        self.after(10, animate)
 
 if __name__ == "__main__":
     root = tk.Tk()
