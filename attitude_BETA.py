@@ -74,7 +74,7 @@ class AttitudeIndicator(tk.Canvas):
         roll_radians = math.radians(roll)
         roll_compensation = pitch_offset * math.cos(roll_radians)
 
-        total_offset = pitch_offset
+        total_offset = pitch_offset + roll_compensation
 
         if flip:
             self.bg_image = Image.open(self.bg_image_path).rotate(180)
