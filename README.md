@@ -16,7 +16,6 @@ AirTelemetry is a Python-based project utilizing Tkinter to create minimal GUI i
 ## Notes
 Airspeed Indicator's needle is capped to 270 kph but the display will keep printing as needed.
 
-
 ## Screenshots
 <img src="readme_assets/ss_speedo.png" alt="speedometer" width="400"/>
 <img src="readme_assets/ss_compass.png" alt="heading" width="400"/>
@@ -24,3 +23,11 @@ Airspeed Indicator's needle is capped to 270 kph but the display will keep print
 
 ## Sample Usage Code
 ```* To be updated```
+
+## Current Status
+- **Airspeed Indicator**: Completed
+- **Heading Indicator**: Completed
+- **Attitude Indicator**: BETA - Bugs present
+- **Altimeter**: In Design Phase
+- **Turn Coordinator**: Researching
+- **Vertical Speed Indicator**: Not started 
