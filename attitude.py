@@ -1,5 +1,3 @@
-# IN BETA, INACCURATE PITCH INDICATION ON ROLL
-
 import tkinter as tk
 from PIL import Image, ImageTk
 import math
