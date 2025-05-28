@@ -7,8 +7,8 @@ AirTelemetry is a Python-based project utilizing Tkinter to create minimal GUI i
 
 - **Airspeed Indicator**: Visual representation of the aircraft's speed.
 - **Heading Indicator**: Displays the aircraft's current heading direction.
+- **Attitude Indicator**: Shows the aircraft's orientation relative to the horizon.
 - **Coming Soon**:
-  - **Attitude Indicator [BETA]**: Shows the aircraft's orientation relative to the horizon.
   - **Altimeter**: Indicates the aircraft's altitude above sea level.
   - **Turn Coordinator**: Displays the rate of turn and coordination.
   - **Vertical Speed Indicator**: Measures the rate of climb or descent.
