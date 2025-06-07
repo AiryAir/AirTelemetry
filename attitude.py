@@ -2,7 +2,9 @@ import tkinter as tk
 from PIL import Image, ImageTk
 import math
 
-class AttitudeIndicator(tk.Canvas):    def __init__(self, parent, bg_image_path, fg_image_path, *args, **kwargs):
+class AttitudeIndicator(tk.Canvas):    
+    
+    def __init__(self, parent, bg_image_path, fg_image_path, *args, **kwargs):
         super().__init__(parent, *args, **kwargs)
         self.bg_image_path = bg_image_path
         self.fg_image_path = fg_image_path
