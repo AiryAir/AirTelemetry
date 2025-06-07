@@ -27,7 +27,7 @@ Airspeed Indicator's needle is capped to 270 kph but the display will keep print
 ## Current Status
 - **Airspeed Indicator**: Completed
 - **Heading Indicator**: Completed
-- **Attitude Indicator**: BETA - Bugs present
+- **Attitude Indicator**: Completed
 - **Altimeter**: In Design Phase
 - **Turn Coordinator**: Researching
 - **Vertical Speed Indicator**: Not started 
