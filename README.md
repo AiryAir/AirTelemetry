@@ -67,6 +67,7 @@ Airspeed Indicator's needle is capped to 270 kph but the display will keep print
 <img src="readme_assets/ss_speedo.png" alt="speedometer" width="400"/>
 <img src="readme_assets/ss_compass.png" alt="heading" width="400"/>
 <img src="readme_assets/attitude_gif.gif" alt="attitude" width="400"/>
+<img src="readme_assets/ss_altimeter.png" alt="altimeter" width="400"/>
 
 ## Current Status
 - **Airspeed Indicator**: Completed
